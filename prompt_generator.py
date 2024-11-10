@@ -26,16 +26,19 @@ for i in bigprompt:
         continue
     else:
         id_list.append(i[0])
-count=1
-level=0
-exclude_list=[]
+
 #getting the final prompt list
-while count<5:
-    id_num=choice([i for i in range(len(id_list)) if i not in exclude_list])
-    exclude_list.append(id_num)
-    id=str(id_num)
-    give_prompt.extend(getGame(id,str(level)))
-    level+=1
-    count+=1
+while len(give_prompt)<16:
+    count=1
+    level=0
+    exclude_list=[]
+    while count<5:
+        id_num=choice([i for i in range(len(id_list)) if i not in exclude_list])
+        exclude_list.append(id_num)
+        id=str(id_num)
+        give_prompt.extend(getGame(id,str(level)))
+        level+=1
+        count+=1
+give_prompt=give_prompt[0:16]
 random.shuffle(give_prompt)
 print(give_prompt)
