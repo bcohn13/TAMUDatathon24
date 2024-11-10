@@ -65,7 +65,9 @@ class ConnectionsEnv(gym.Env):
 
     def suggest_groupings(self):
         prompt = self.load_prompt("propose_false_group_sysprompt")  # Example of using a specific prompt
-        formatted_prompt = prompt.format(random_words=', '.join(self.words))
+        # Convert all items in self.words to strings
+        words_as_strings = [str(word) for word in self.words]
+        formatted_prompt = prompt.format(random_words=', '.join(words_as_strings))
         response = self.llm(formatted_prompt, max_length=150, num_return_sequences=1)
         return response[0]['generated_text']
 
